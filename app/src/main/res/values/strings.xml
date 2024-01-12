@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Monri Android SDK Example</string>
+    <string name="pay_button">Pay</string>
+    <string name="save_card_for_future_payment">Save card for future payments</string>
+</resources>
