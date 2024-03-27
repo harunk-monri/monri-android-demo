@@ -15,7 +15,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 class ApiModule {
     //singleton
     private static ExampleApi exampleApi = null;
-    public static final String BASE_URL = "https://mobile.webteh.hr/";
+    public static final String BASE_URL = "https://dashboard.monri.com/api/examples/ruby/";
 
     private ApiModule() {
     }

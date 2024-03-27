@@ -19,22 +19,24 @@ import com.monri.android.ResultCallback;
 import com.monri.android.model.Card;
 import com.monri.android.model.ConfirmPaymentParams;
 import com.monri.android.model.CustomerParams;
+import com.monri.android.model.DirectPayment;
 import com.monri.android.model.MonriApiOptions;
 import com.monri.android.model.PaymentMethodParams;
 import com.monri.android.model.PaymentResult;
 import com.monri.android.model.TransactionParams;
 import com.monri.android.view.CardMultilineWidget;
 
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity implements ResultCallback<PaymentResult> {
+
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Monri monri;
     private CardMultilineWidget monriCardWidget;
     private Button payButton;
+    private Button payWithPayCekButton;
     private TextView result;
     private CheckBox checkbox;
 
@@ -54,14 +56,9 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Pa
         super.onDestroy();
     }
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     private void init() {
         monri = new Monri(((ActivityResultCaller) this),
-                MonriApiOptions.create(Config.authenticityToken(), Config.isDevelopmentMode())
+                          MonriApiOptions.create(Config.authenticityToken(), Config.isDevelopmentMode())
         );
     }
 
@@ -69,23 +66,31 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Pa
         monriCardWidget = findViewById(R.id.monri_card_widget);
         checkbox = findViewById(R.id.checkbox);
         payButton = findViewById(R.id.pay);
+        payWithPayCekButton = findViewById(R.id.button_pay_with_paycek);
         result = findViewById(R.id.result);
     }
 
-
     private void bindEvents() {
-        payButton.setOnClickListener(view -> proceedWithPayment());
+        payButton.setOnClickListener(view -> startCardPayment());
+        payWithPayCekButton.setOnClickListener(view -> startPayCekPayment());
     }
 
-    private void proceedWithPayment() {
+    private void startCardPayment() {
         final Card card = monriCardWidget.getCard();
         if (card == null || !card.validateCard()) {
             return;
         }
         final PaymentMethodParams paymentMethodParams = card.setTokenizePan(checkbox.isChecked()).toPaymentMethodParams();
+        proceedWithPayment(() -> paymentMethodParams);
+    }
 
+    private void startPayCekPayment() {
+        proceedWithPayment(() -> new DirectPayment(DirectPayment.Provider.PAY_CEK_HR).toPaymentMethodParams());
+    }
+
+    private void proceedWithPayment(Supplier<PaymentMethodParams> paymentMethodParamsSupplier) {
         final Disposable subscription = OrderRepository.createPaymentSession(false)
-                .subscribe(handlePaymentSessionResponse(() -> paymentMethodParams));
+                                                       .subscribe(handlePaymentSessionResponse(paymentMethodParamsSupplier));
 
         compositeDisposable.add(subscription);
     }

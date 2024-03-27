@@ -9,6 +9,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 interface ExampleApi {
-    @POST("example/create-payment-session")
+    @POST("examples/create-payment-session")
     Single<NewPaymentResponse> createPaymentSession(@Body NewPaymentRequest request);
 }
