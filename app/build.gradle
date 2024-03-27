@@ -36,17 +36,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment:2.7.6'
-    implementation 'androidx.navigation:navigation-ui:2.7.6'
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
 
     //Monri SDK
-    implementation 'com.monri:monri-android:2.0+'
+    implementation 'com.monri:monri-android:2.1.0'
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //RX + Retrofit
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     //Retrofit converters
-    implementation 'com.squareup.retrofit2:converter-jackson:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
 
     //AndroidSchedulers
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
