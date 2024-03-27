@@ -2,4 +2,6 @@
     <string name="app_name">Monri Android SDK Example</string>
     <string name="pay_button">Pay</string>
     <string name="save_card_for_future_payment">Save card for future payments</string>
+    <string name="pay_with_paycek"/>
+    <string name="or_enter_card_details_and_pay_with_card">Or enter card details and pay with credit card</string>
 </resources>

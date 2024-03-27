@@ -1,17 +1,15 @@
 package com.example.myapplication;
 
-import androidx.activity.result.ActivityResultCaller;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Supplier;
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultCaller;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Supplier;
 
 import com.example.myapplication.models.NewPaymentResponse;
 import com.monri.android.Monri;
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Pa
 
     private void init() {
         monri = new Monri(((ActivityResultCaller) this),
-                          MonriApiOptions.create(Config.authenticityToken(), Config.isDevelopmentMode())
+                MonriApiOptions.create(Config.authenticityToken(), Config.isDevelopmentMode())
         );
     }
 
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Pa
 
     private void proceedWithPayment(Supplier<PaymentMethodParams> paymentMethodParamsSupplier) {
         final Disposable subscription = OrderRepository.createPaymentSession(false)
-                                                       .subscribe(handlePaymentSessionResponse(paymentMethodParamsSupplier));
+                .subscribe(handlePaymentSessionResponse(paymentMethodParamsSupplier));
 
         compositeDisposable.add(subscription);
     }

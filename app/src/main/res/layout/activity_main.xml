@@ -8,9 +8,10 @@
 
     <Button
         android:id="@+id/button_pay_with_paycek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:foreground="@drawable/paycek"
         android:text="@string/pay_with_paycek"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
